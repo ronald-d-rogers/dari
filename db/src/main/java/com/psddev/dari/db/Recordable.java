@@ -206,7 +206,6 @@ public interface Recordable {
 
     /** Specifies the target's internal name. */
     @Documented
-    @ObjectType.AnnotationProcessorClass(InternalNameProcessor.class)
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ ElementType.FIELD, ElementType.TYPE, ElementType.METHOD })
     public @interface InternalName {
@@ -736,13 +735,6 @@ class GroupsProcessor implements
     @Override
     public void process(ObjectType type, Recordable.Groups annotation) {
         Collections.addAll(type.getGroups(), annotation.value());
-    }
-}
-
-class InternalNameProcessor implements ObjectType.AnnotationProcessor<Recordable.InternalName> {
-    @Override
-    public void process(ObjectType type, Recordable.InternalName annotation) {
-        type.setInternalName(annotation.value());
     }
 }
 
